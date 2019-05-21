@@ -33,7 +33,7 @@ for f in files
     include(f * ".jl")
 end
 
-!isfile(joinpath(datapath, "scLib.jld")) && updateSCLib()#dName * "/data/scLib.jld") # <- this for .jld library
+# !isfile(joinpath(datapath, "scLib.jld")) && updateSCLib()#dName * "/data/scLib.jld") # <- this for .jld library
 
 # if isdir(dName * "/data/scLib.jld")
 # 	rm(dName * "/data/scLib.jld")
