@@ -1,4 +1,4 @@
-using AstroSciKit, Base.Test, Base.Dates
+using AstroSciKit, Test, Dates
 
 println("Running tests:")
 
@@ -9,19 +9,19 @@ include("test_geometry.jl")
 d1, m1, s1 = 35, 15, 53.63 # [deg min sec]
 d = 0.6154886 # [rad]
 
-@test_approx_eq_eps dms2rad( d1,  m1,  s1)  d 1e-6
-@test_approx_eq_eps dms2rad(-d1,  m1,  s1) -d 1e-6
-@test_approx_eq_eps dms2rad(-d1, -m1, -s1) -d 1e-6
-@test_approx_eq_eps dms2rad( d1, -m1,  s1) -d 1e-6
+@test isapprox(dms2rad( d1,  m1,  s1), d, atol=1e-6)
+@test isapprox(dms2rad(-d1,  m1,  s1), -d, atol=1e-6)
+@test isapprox(dms2rad(-d1, -m1, -s1), -d, atol=1e-6)
+@test isapprox(dms2rad( d1, -m1,  s1), -d, atol=1e-6)
 
-@test all(abs(rad2dms(-d) - [-d1 -m1 -s1]) .< 1e-2)
-@test all(abs(rad2dms( d) - [ d1  m1  s1]) .< 1e-2)
+@test all(abs.(rad2dms(-d) - [-d1 -m1 -s1]) .< 1e-2)
+@test all(abs.(rad2dms( d) - [ d1  m1  s1]) .< 1e-2)
 
 d2, m2, s2 = rad2dms(dms2rad(d1, m1, s1))
-@test all(abs([d1 m1 s1] - [d2 m2 s2]) .< 1e-10)
+@test all(abs.([d1 m1 s1] - [d2 m2 s2]) .< 1e-10)
 
 d2, m2, s2 = rad2dms(dms2rad(-d1, -m1, -s1))
-@test all(abs([-d1 -m1 -s1] - [d2 m2 s2]) .< 1e-10)
+@test all(abs.([-d1 -m1 -s1] - [d2 m2 s2]) .< 1e-10)
 
 
 
@@ -29,11 +29,11 @@ d2, m2, s2 = rad2dms(dms2rad(-d1, -m1, -s1))
 h1, m1, s1 = 15, 15, 53.63 # [hr min sec]
 τ = 3.996341 # [rad]
 
-@test_approx_eq_eps hms2rad(h1, m1, s1) τ 1e-6
-@test all(abs(rad2hms(τ) - [h1 m1 s1]) .< 1e-2)
+@test isapprox(hms2rad(h1, m1, s1), τ, atol=1e-6)
+@test all(abs.(rad2hms(τ) - [h1 m1 s1]) .< 1e-2)
 
 h2, m2, s2 = rad2hms(hms2rad(h1, m1, s1))
-@test all(abs([h1 m1 s1] - [h2 m2 s2]) .< 1e-10)
+@test all(abs.([h1 m1 s1] - [h2 m2 s2]) .< 1e-10)
 
 
 
@@ -41,11 +41,11 @@ h2, m2, s2 = rad2hms(hms2rad(h1, m1, s1))
 h1, m1, s1 = 13, 22, 45.98 # [hr min sec]
 τ = 48165.98 # [sec] (time of day)
 
-@test_approx_eq_eps hms2τ(h1, m1, s1) τ 1e-6
-@test all(abs(τ2hms(τ) - [h1 m1 s1]) .< 1e-2)
+@test isapprox(hms2τ(h1, m1, s1), τ, atol=1e-6)
+@test all(abs.(τ2hms(τ) - [h1 m1 s1]) .< 1e-2)
 
 h2, m2, s2 = τ2hms(hms2τ(h1, m1, s1))
-@test all(abs([h1 m1 s1] - [h2 m2 s2]) .< 1e-10)
+@test all(abs.([h1 m1 s1] - [h2 m2 s2]) .< 1e-10)
 
 
 # Test shadow:

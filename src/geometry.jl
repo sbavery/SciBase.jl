@@ -344,7 +344,7 @@ A(R′::Real, d′::Real) = R′^2*acos(d′/R′) - d′*√(R′^2-d′^2)
 function circleOverlapArea(R₁::Real, R₂::Real, d::Real)
     (d < abs(R₁-R₂)) && return π*min(R₁, R₂)^2  # One circle inside other
     (d ≥     R₁+R₂ ) && return 0.0              # Circles don't overlap
-    (d₁, d₂) = 0.5inv(d)*(d^2 + [-1.0, 1.0]*(R₂^2 - R₁^2))
+    (d₁, d₂) = 0.5*inv(d).*(d^2 .+ [-1.0, 1.0].*(R₂^2 - R₁^2))
     return A(R₁, d₁) + A(R₂, d₂)
 end
 
@@ -390,17 +390,15 @@ TODO: Add generalized penumbra & umbra conditions so that circle overlap bit onl
 """
 function shadow(r⃗☆::Array{T}, r⃗::Array{T}; r⃗●::Array{T}=zeros(3), re●::T=R⨁, re☆::T=R☉) where T <: Float64
 #     if the satellite is closer to the star than the body is, you're good.
-    norm(r⃗-r⃗☆) < norm(r⃗●-r⃗☆) && return 1.0
-
+    norm(r⃗.-r⃗☆) < norm(r⃗●.-r⃗☆) && return 1.0
 #     get angular diameter (radius) and spherical coordinates as viewed from the satellite of both body and star.
-    re●′ = angularRadius(re●, norm(r⃗-r⃗●))
-    r⃗●′  = αδr2ijk(r⃗●-r⃗, inv=true)
+    re●′ = angularRadius(re●, norm(r⃗.-r⃗●))
+    r⃗●′  = αδr2ijk(r⃗●.-r⃗, inv=true)
 
-    re☆′ = angularRadius(re☆, norm(r⃗-r⃗☆))
-    r⃗☆′  = αδr2ijk(r⃗☆-r⃗, inv=true)
+    re☆′ = angularRadius(re☆, norm(r⃗.-r⃗☆))
+    r⃗☆′  = αδr2ijk(r⃗☆.-r⃗, inv=true)
 
     d    = norm(r⃗☆′[1:2]-r⃗●′[1:2])
-
     A☆′  = π*re☆′^2
     A◐′  = circleOverlapArea(re●′, re☆′, d)
 
