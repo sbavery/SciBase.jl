@@ -356,7 +356,7 @@ function addAntenna(parent, target; G=0.0, P_dBW=0.0, P_dBm=0.0, P_W=0.0, f=0.0,
             write(scLib, SC.name, SC)
         end
     catch
-        if isdefined(parse(parent)) # e.g. if "SFO" is defined as Celeste.groundstation SFO
+        if isdefined(parse(parent))
             push!(eval(parse(parent * ".children")), ant)
         else
             @error "$parent not found."

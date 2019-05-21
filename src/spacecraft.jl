@@ -370,7 +370,7 @@ function updateSCLib()
 
     scNames = Set()
     jldopen(joinpath(datapath, "scLib.jld"), "w") do scLib
-        addrequire(scLib, celeste)
+        addrequire(scLib, AstroSciKit)
         for TLEurl in TLEurls
             pageSC = readTLEurl(TLEurl)
             for scTLE in pageSC
