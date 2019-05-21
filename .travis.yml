@@ -2,7 +2,9 @@ language: julia
 julia:
   - nightly
   - 1.1
-  - 1.1.1
+
+before_install:
+- julia -e 'Pkg.add("Conda"); using Conda; Conda.add("numpy"); Conda.add("scipy"); Conda.add("matplotlib")'
   
 codecov: true
 
