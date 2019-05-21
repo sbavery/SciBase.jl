@@ -4,7 +4,7 @@ julia:
   - 1.1
 
 before_install:
-- julia -e 'using Pkg; Pkg.add("Conda"); using Conda; Conda.add("numpy"); Conda.add("scipy"); Conda.add("matplotlib")'
+- julia -e 'ENV["PYTHON"]=""'
   
 codecov: true
 
