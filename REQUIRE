@@ -6,5 +6,3 @@ HTTP
 JLD 0.6.6
 HDF5
 SpecialFunctions
-DelimitedFiles
-LinearAlgebra
