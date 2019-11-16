@@ -1,8 +1,5 @@
 module AutoSolver
 
-using Polynomials, PyPlot, PyCall, HTTP, SpecialFunctions, Dates, JLD, HDF5, DelimitedFiles, LinearAlgebra, Printf
-import Statistics.mean
-
 #files = [
 #		]
 
@@ -264,9 +261,7 @@ function autoSolveOutputs(mods::Array{Module})
         if !isempty(funcs)
             println("::::MODULE $(mod)::::")
             out_d, in_d = varExplodeDict(funcs)
-            @show in_d
             inp_map, out_map = crossVarMap(in_d,out_d)
-            @show inp_map
             println()
             outputDict(funcs, outputs, mod=in_mod, inp_map=inp_map)
             @show outputs
