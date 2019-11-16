@@ -1,0 +1,13 @@
+language: julia
+julia:
+#  - nightly
+  - 1.1
+  - 1.2
+
+before_install:
+- julia -e 'ENV["PYTHON"]=""'
+  
+codecov: true
+
+after_success:
+- julia -e 'cd(Pkg.dir("AutoSolver")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
