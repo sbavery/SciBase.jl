@@ -10,4 +10,4 @@ before_install:
 #codecov: true
 
 #after_success:
-#- julia -e 'cd(Pkg.dir("AutoSolver")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'
+#- julia -e 'cd(Pkg.dir("SciBase")); Pkg.add("Coverage"); using Coverage; Codecov.submit(Codecov.process_folder())'

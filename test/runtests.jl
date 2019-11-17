@@ -1,4 +1,4 @@
-using AutoSolver, Test
+using SciBase, Test, Unitful
 
 println("Running tests:")
 
